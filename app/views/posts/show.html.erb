@@ -1,0 +1,12 @@
+<h3><%= @post.title%></h3>
+<ul class="well">
+	<li><%= @post.creator.username%></li>
+	<li><%= @post.url%></li>
+	<li><%= @post.description%></li>
+	<ul>
+		<% @post.comments.each do|comment| %>
+		<li><%= comment.body %></li>
+		<% end %>
+		
+	</ul>
+</ul>
