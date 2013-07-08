@@ -9,6 +9,8 @@
 		<% @post.comments.each do|comment| %>
 		<li><%= comment.body %></li>
 		<% end %>
+		<br/ >
+		<%= link_to "Add Comment", new_post_comment_path(@post) %>
 		
 	</ul>
 <%= link_to 'Edit', edit_post_path(@post)%>
