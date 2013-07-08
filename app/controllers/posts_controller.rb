@@ -30,6 +30,7 @@ class PostsController < ApplicationController
   def update
     
    @post = Post.find(params[:id])
+   
     if @post.update_attributes(params[:post].permit!)
       redirect_to root_path, notice: "You have successfully updated your post!"
     else

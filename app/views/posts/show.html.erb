@@ -3,13 +3,14 @@
 	<li><%= @post.title%></li>
 	<li><%= @post.url%></li>
 	<li><%= @post.description%></li>
-	<ul>
+</ul>
+<h4>Comments: </h4>
+<ul class="well">
 		<% @post.comments.each do|comment| %>
 		<li><%= comment.body %></li>
 		<% end %>
 		
 	</ul>
-</ul>
 <%= link_to 'Edit', edit_post_path(@post)%>
 <br />
 <%= link_to 'Back', posts_path %>

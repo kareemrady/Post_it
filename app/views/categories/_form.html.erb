@@ -1,0 +1,13 @@
+<%= form_for @category do |c| %>
+<% if @category.errors.any? %>
+	<% @category.errors.full_messages.each do |msg| %>
+	<ul class="alert alert-error">
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+	<% end %>
+	<%= c.label :name %>
+	<%= c.text_field :name %>
+	<br/ >
+	<%= c.submit "Create Category", class: "btn btn-primary" %>
+	<% end %>
