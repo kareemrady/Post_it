@@ -1,6 +1,6 @@
 <h3><%= @post.title%></h3>
 <ul class="well">
-	<li><%= @post.creator.username%></li>
+	<li><%= @post.title%></li>
 	<li><%= @post.url%></li>
 	<li><%= @post.description%></li>
 	<ul>
@@ -10,3 +10,6 @@
 		
 	</ul>
 </ul>
+<%= link_to 'Edit', edit_post_path(@post)%>
+<br />
+<%= link_to 'Back', posts_path %>

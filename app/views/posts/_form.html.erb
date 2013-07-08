@@ -1,0 +1,22 @@
+<%= form_for @post do |p| %>
+<% if @post.errors.any? %>
+<ul class="alert alert-error">
+	<% @post.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</ul>
+<% end %>
+
+
+	<%= p.label :title %>
+	<%= p.text_field :title %>
+	<br/>
+	<%= p.label :url %>
+	<%= p.text_field :url %>
+	<br/ >
+	<%= p.label :description %>
+	<%= p.text_field :description %>
+	<br/ >
+	<%= p.submit "Create Post", class: "btn btn-primary" %>
+
+	<% end %>
