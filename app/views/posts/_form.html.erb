@@ -19,7 +19,7 @@
 	<br/ >
 	
 	
-	<%= p.submit "Create Post", class: "btn btn-primary" %>
+	<%= p.submit @post.new_record? ? "Create Post" : "Update Post", class: "btn btn-primary"%>
 	
 	<% end %>
 	

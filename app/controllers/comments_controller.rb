@@ -9,12 +9,13 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-		@comment = Comment.new(params[:comment].permit!)
-		
 		@post = Post.find(params[:post_id])
+		@comment = @post.comments.build(params[:comment].permit!)
+					
 		
 		
-		if @post.comments << @comment
+		
+		if @comment.save
 			redirect_to post_path(@post), notice: "Comment successfully published!!"
 		else
 			render :new

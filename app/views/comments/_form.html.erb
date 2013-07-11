@@ -1,4 +1,12 @@
+
 <%= form_for [:post ,@comment] do |m| %>
+<% if @comment.errors.any? %>
+<ul class="alert alert-error">
+	<% @comment.errors.full_messages.each do |msg| %>
+	<li><%= msg %></li>
+	<% end %>
+</ul>
+<% end %>
 <%= m.label :body %>
 <%= m.text_field :body%>
 <%= m.submit "Add Comment" , class: "btn btn-primary" %>
