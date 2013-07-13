@@ -1,13 +1,14 @@
 class CategoriesController < ApplicationController
-
+before_action :find_category, only: [:show, :edit, :update]
 	def index
 		@categories = Category.all
 
 	end
 
 	def show
-		@category = Category.find(params[:id])
-		@post = Post.find(params[:id])
+		
+		@post = @category.posts
+
 
 	end
 
@@ -27,12 +28,11 @@ class CategoriesController < ApplicationController
 	end
 
 	def edit
-		@category = Category.find(params[:id])
-
+		
 	end
 
 	def update
-		@category = Category.find(params[:id])
+		
 		if @category.update_attributes(params[:category].permit!)
 			redirect_to categories_path, notice: "Category has been successfully updated!!"
 		else
@@ -42,7 +42,10 @@ class CategoriesController < ApplicationController
 
 	end
 
+private
 
-
+def find_category
+	@category = Category.find(params[:id])
+end
 
 end
