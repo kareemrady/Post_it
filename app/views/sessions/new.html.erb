@@ -1,0 +1,14 @@
+<h4>Please Log in </h4>
+<hr>
+<%= form_tag '/login' , method: 'post' do %>
+	<%= label_tag :username %>
+	<%= text_field_tag :username %>
+	<br/ >
+	<%= label_tag :password %>
+	<%= password_field_tag :password %>
+	<br />
+
+	<%= submit_tag :"Log in",  class: "btn btn-success" %>
+
+	<% end %>
+

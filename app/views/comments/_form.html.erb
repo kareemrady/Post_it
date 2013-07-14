@@ -2,5 +2,6 @@
 <%= form_for [:post ,@comment] do |m| %>
 <%= m.label :body %>
 <%= m.text_field :body%>
+<br/ >
 <%= m.submit "Add Comment" , class: "btn btn-primary" %>
 <% end %>

@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
 before_action :find_category, only: [:show, :edit, :update]
+before_action :require_user, only:[:show, :edit, :update]
 	def index
 		@categories = Category.all
 
@@ -7,8 +8,7 @@ before_action :find_category, only: [:show, :edit, :update]
 
 	def show
 		
-		@post = @category.posts
-
+		@p = @category.posts
 
 	end
 

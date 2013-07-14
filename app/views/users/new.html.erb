@@ -1,0 +1,11 @@
+<%= render "shared/errors", obj: @user %>
+<h4>Register New User</h4>
+<hr>
+<%= form_for @user do |u| %>
+<%= u.label :username %>
+<%= u.text_field :username %>
+<%= u.label :password %>
+<%= u.password_field :password %>
+<br/ >
+<%= u.submit "Submit", class: "btn btn-success" %>
+<% end %>

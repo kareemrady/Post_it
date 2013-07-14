@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
 	before_action :find_comment, only: [:new, :create]
+	before_action :require_user, only: [:new, :create]
+
 	def new
-		
-		
+				
 		@comment = Comment.new
 		
-
 	end
 
 	def create
@@ -19,8 +19,14 @@ class CommentsController < ApplicationController
 			render :new
 		end
 	end
+	private
+
 	def find_comment
 		@post = Post.find(params[:post_id])
+	end
+
+
+
 	end
 
 end

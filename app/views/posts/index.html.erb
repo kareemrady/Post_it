@@ -2,5 +2,18 @@
 <% @posts.each do |post| %>
 <ul class="well">
 	<%= link_to post.title, post_path(post) %>
+	<% if logged_in? && current_user == post.creator %>
+	<small>
+		<%= link_to '(edit)', edit_post_path(post) %>
+	</small>
+	<% end %>
+	<br/ >
+	<small >
+		<strong>Created at: </strong><em><%= post.created_at%></em>
+	</small>
+	<br/ >
+	<small >
+		<strong>Created by: </strong><em><%= post.creator.username %></em>
+	</small>
 </ul>
 <% end %>
