@@ -11,8 +11,9 @@
 
 
 <% @posts.each do |post| %>
-<% if logged_in? %>
 <div class="row">
+<% if logged_in? %>
+
 <div id="voting"class="well span1">
 	<%= link_to vote_post_path(post, vote: true), method: 'post' do%>
 	<i class="icon-level-up icon-2x"></i>

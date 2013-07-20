@@ -14,6 +14,7 @@ Comments:
 
 	<div class="row">
 	<% if logged_in? %>
+	
 	<div id="voting" class="well span1">
 		
 		<%= link_to vote_post_comment_path(@post, comment, vote: true), method: 'post' do %>
