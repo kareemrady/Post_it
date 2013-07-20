@@ -1,4 +1,15 @@
+<% if !logged_in?%>
+<div class="hero-unit">
+	<h1>Welcome to Post it!</h1>
+<p>Post notes, share comments & more! </p>
+<p class ="pull-right">
+	<%= link_to 'Register Here' , register_path ,class: "btn btn-primary btn-large"%>
+	</p>
+</div>
+<%end%>
 <h3>All Posts</h3>
+
+
 <% @posts.each do |post| %>
 <% if logged_in? %>
 <div class="well span1">
@@ -12,10 +23,13 @@
 	<i class="icon-arrow-down"></i>
 	<% end %>
 	</div>
-	<% end %>
-<ul class="well span9">
 
-	<%= link_to post.title, post_path(post) %>
+	<% end %>
+	<ul class="well span9">
+
+		<%= link_to post.title, post_path(post) %>
+	
+
 	<% if logged_in? && current_user == post.creator %>
 	<small>
 		<%= link_to '(edit)', edit_post_path(post) %>
@@ -30,5 +44,8 @@
 	<small >
 		<strong>Created by: </strong><em><%= post.creator.username %></em>
 	</small>
+	
+
 </ul>
+
 <% end %>
