@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
-  before_action :require_user, only: [:new, :create, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
+  before_action :require_user, only: [:new, :create, :edit, :update, :vote]
   before_action :require_creator, only: [:edit, :update]
   def index
   	@posts = Post.all
@@ -41,11 +41,22 @@ class PostsController < ApplicationController
     end
   end
 
+  def vote
+    
+    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    redirect_to root_path, notice: "your vote has been successfully submited!!"
+    end
+
+  def total_votes
+    @post.votes.where(vote: true).size - @post.votes.where(vote: false)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       
       @post = Post.find(params[:id])
+      
     end
 
     def post_params

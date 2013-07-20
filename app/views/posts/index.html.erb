@@ -1,6 +1,20 @@
 <h3>All Posts</h3>
 <% @posts.each do |post| %>
-<ul class="well">
+<% if logged_in? %>
+<div class="well span1">
+	<%= link_to vote_post_path(post, vote: true), method: 'post' do%>
+	<i class="icon-arrow-up"></i>
+	<% end %>
+	<br/ >
+	<%= "#{post.total_votes} votes"%>
+	<br/ >
+	<%= link_to vote_post_path(post, vote: false), method: 'post' do %>
+	<i class="icon-arrow-down"></i>
+	<% end %>
+	</div>
+	<% end %>
+<ul class="well span9">
+
 	<%= link_to post.title, post_path(post) %>
 	<% if logged_in? && current_user == post.creator %>
 	<small>
@@ -8,8 +22,9 @@
 	</small>
 	<% end %>
 	<br/ >
+	
 	<small >
-		<strong>Created at: </strong><em><%= post.created_at%></em>
+		<strong>Created at: </strong><em><%= time_tag post.created_at %></em>
 	</small>
 	<br/ >
 	<small >
