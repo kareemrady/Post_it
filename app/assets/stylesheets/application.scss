@@ -13,6 +13,7 @@
  */
 
  @import "bootstrap";
+ @import "font-awesome";
 
  .container {
   margin-left: 135px
@@ -42,3 +43,14 @@ div.comment_votes {
   padding: 10px;
 }
 
+.icon-level-up{
+color: #599653;
+  
+}
+.icon-level-down{
+color: #cc2a36;
+  
+}
+#voting {
+  padding: 10px;
+}

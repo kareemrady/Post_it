@@ -14,16 +14,16 @@ Comments:
 
 	<div class="row">
 	<% if logged_in? %>
-	<div class="well span1">
+	<div id="voting" class="well span1">
 		
 		<%= link_to vote_post_comment_path(@post, comment, vote: true), method: 'post' do %>
-		<i class="icon-arrow-up"></i>
+		<i class="icon-level-up icon-2x"></i>
 		<% end %>
 		<br/ >
 		<%= "#{comment.total_votes} votes" %>
 		
 		<%= link_to vote_post_comment_path(@post, comment, vote: false), method: 'post' do%>
-		<i class="icon-arrow-down"></i>
+		<i class="icon-level-down icon-2x"></i>
 		<% end %>
 		
 	</div>
@@ -34,9 +34,10 @@ Comments:
 		<ul class="well span9">
 			
 				
-		<li><%= comment.body %></li>
+		<%= comment.body %>
+		<br/ >
 		
-		<strong>Created by: </strong><em><%= comment.creator.username %></em>
+		<small><strong>Created by: </strong><em><%= comment.creator.username %></em></small>
 	
 		</ul>
 	</div>
