@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
 
+
   def logged_in?
   	!!current_user
 
@@ -29,6 +30,8 @@ def require_user
       flash[:error] = "You are not allowed to perform this action"
       redirect_to root_path
     end
+
+      
 
     
 end

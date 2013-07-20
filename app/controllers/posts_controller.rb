@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, only: [:new, :create, :edit, :update, :vote]
   before_action :require_creator, only: [:edit, :update]
+  before_action :already_voted?, only: [:vote]
   def index
   	@posts = Post.all
   end
@@ -17,6 +18,7 @@ class PostsController < ApplicationController
   end
 
   def create
+   
     @user = User.find(session[:user_id])
   	@post = Post.new(post_params)
   	if @post.save
@@ -34,7 +36,7 @@ class PostsController < ApplicationController
   def update
     
      
-    if @post.update_attributes(params[:post].permit!)
+    if @post.update_attributes(post_params)
       redirect_to root_path, notice: "You have successfully updated your post!"
     else
       render :edit
@@ -43,13 +45,12 @@ class PostsController < ApplicationController
 
   def vote
     
-    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
-    redirect_to root_path, notice: "your vote has been successfully submited!!"
+       Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    
+    redirect_to :back, notice: "your vote has been successfully submited!!"
     end
 
-  def total_votes
-    @post.votes.where(vote: true).size - @post.votes.where(vote: false)
-  end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -67,7 +68,13 @@ class PostsController < ApplicationController
       access_denied unless logged_in? && current_user == @post.creator
         
     end
-
+    def already_voted?
+      if current_user.votes.where(voteable_type: "Post", voteable_id: params[:id]).size >=1
+      flash[:error]= "You have already voted"
+      redirect_to :back
+      end
+    end
+   
     
 
     
