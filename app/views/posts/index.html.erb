@@ -8,50 +8,6 @@
 </div>
 <%end%>
 <h3>All Posts</h3>
+<%= render 'post' %>
 
-
-<% @posts.each do |post| %>
-<div class="row">
-<% if logged_in? %>
-
-<div id="voting"class="well span1">
-	<%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do%>
-	<i class="icon-level-up icon-2x"></i>
-	<% end %>
-	<br/ >
-	<span id="vote_<%= post.id %>_votes">
-	<%= "#{post.total_votes} votes"%>
-</span>
-	<br/ >
-	<%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
-	<i class="icon-level-down icon-2x"></i>
-	<% end %>
-	</div>
-
-
-	<% end %>
-	<ul class="well span8">
-
-		<%= link_to post.title, post_path(post) %>
 	
-
-	<% if logged_in? && current_user == post.creator %>
-	<small>
-		<%= link_to '(edit)', edit_post_path(post) %>
-	</small>
-	<% end %>
-	<br/ >
-	
-	<small >
-		<strong>Created at: </strong><em><%= time_tag post.created_at %></em>
-	</small>
-	<br/ >
-	<small >
-		<strong>Created by: </strong><em><%= post.creator.username %></em>
-	</small>
-	
-
-</ul>
-</div>
-
-<% end %>

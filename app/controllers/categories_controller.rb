@@ -8,7 +8,7 @@ before_action :require_user, only:[:show, :edit, :update]
 
 	def show
 		
-		@p = @category.posts
+		@post = @category.posts
 
 	end
 

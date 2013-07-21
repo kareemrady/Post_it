@@ -1,9 +1,5 @@
 <h3>Showing <%= @category.name%></h3>
 <h4> All Posts in <%= @category.name%></h4>
-<% @p.each do |post|%>
-<div class="well">
-<%= link_to post.title, post_path(post)%>
-</div>
-<% end %>
+<%= render '/posts/post'%>
 <p><%= link_to "Edit", edit_category_path(@category) %></p>
 <p><%= link_to "Back", categories_path %></p>

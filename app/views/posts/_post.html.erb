@@ -1,0 +1,38 @@
+<% @post.each do |post|%>
+<div class="row">
+	<% if logged_in? %>
+	<div class="well span1">
+		<%= link_to vote_post_path(post, vote: true) , method: 'post', remote: true do %>
+		<i class= "icon-level-up icon-2x"></i>
+		<% end %>
+		<br/ >
+		<%= post.total_votes%> votes
+		<br/ >
+		<%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
+		<i class="icon-level-down icon-2x"></i>
+		<% end %>
+		
+	</div>
+	<% end %>
+<div class="well span9">
+
+<%= link_to post.title, post_path(post.url)%>
+<% if logged_in? && current_user == post.creator %>
+	<small>
+		<%= link_to '(edit)', edit_post_path(post) %>
+	</small>
+	<% end %>
+<br/ >
+<br/ >
+<small>Created by: <em><%= post.creator.username %></em></small>
+<br/ >
+<small>Created at: <em><%= post.created_at %></em></small>
+<br/ >
+
+</div>
+
+
+</div>
+
+	<br/ >
+<% end %>

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :require_creator, only: [:edit, :update]
   
   def index
-  	@posts = Post.all
+  	@post = Post.all
   end
 
   def show
@@ -41,6 +41,10 @@ class PostsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def user_posts
+    @post = current_user.posts
   end
 
   def vote
