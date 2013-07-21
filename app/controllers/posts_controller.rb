@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, only: [:new, :create, :edit, :update, :vote]
   before_action :require_creator, only: [:edit, :update]
-  before_action :already_voted?, only: [:vote]
+  
   def index
   	@posts = Post.all
   end
@@ -44,13 +44,16 @@ class PostsController < ApplicationController
   end
 
   def vote
-    
-       Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
-    
-    redirect_to :back, notice: "your vote has been successfully submited!!"
+    respond_to do |format|
+      format.js do 
+        if current_user.already_voted_on?(@post)
+          render js: "alert('You have already voted')"          
+        else
+          Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+        end
+      end
     end
-
-  
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -68,12 +71,7 @@ class PostsController < ApplicationController
       access_denied unless logged_in? && current_user == @post.creator
         
     end
-    def already_voted?
-      if current_user.votes.where(voteable_type: "Post", voteable_id: params[:id]).size >=1
-      flash[:error]= "You have already voted"
-      redirect_to :back
-      end
-    end
+    
    
     
 

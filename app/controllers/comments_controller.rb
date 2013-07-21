@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 	before_action :find_post, only: [:new, :create, :vote]
 	before_action :find_comment, only: [:vote]
 	before_action :require_user, only: [:new, :create, :vote]
-	before_action :already_voted?, only: [:vote]
+
 
 	def new
 				
@@ -24,11 +24,18 @@ class CommentsController < ApplicationController
 	end
 
 	def vote
-		
-		Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
-		redirect_to :back, notice: "Your vote has been successfully submitted!!"
+		respond_to do |format|
+      format.js do 
+        if current_user.already_voted_on?(@comment)
+          render js: "alert('You have already voted')"          
+        else
+          Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
+        end
+      end
+    end
+  end  
 
-	end
+	
 
 	private
 
@@ -40,13 +47,7 @@ class CommentsController < ApplicationController
 
 		@comment = Comment.find(params[:id])
 	end
-def already_voted?
-      
-      if current_user.votes.where(voteable_type: "Comment" , voteable_id: params[:id]).size >= 1
-        flash[:error]= "You have already voted"
-      redirect_to :back 
-    end
-  end
+
 
 
 	

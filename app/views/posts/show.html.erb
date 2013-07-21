@@ -17,13 +17,14 @@ Comments:
 	
 	<div id="voting" class="well span1">
 		
-		<%= link_to vote_post_comment_path(@post, comment, vote: true), method: 'post' do %>
+		<%= link_to vote_post_comment_path(@post, comment, vote: true), method: 'post', remote: true  do%>
 		<i class="icon-level-up icon-2x"></i>
 		<% end %>
 		<br/ >
+		<span id="vote_<%= comment.id %>_votes">
 		<%= "#{comment.total_votes} votes" %>
-		
-		<%= link_to vote_post_comment_path(@post, comment, vote: false), method: 'post' do%>
+		</span>
+		<%= link_to vote_post_comment_path(@post, comment, vote: false), method: 'post', remote: true do%>
 		<i class="icon-level-down icon-2x"></i>
 		<% end %>
 		
