@@ -13,4 +13,5 @@ class Post < ActiveRecord::Base
     self.votes.where(vote: true).size - self.votes.where(vote: false).size
   end
   
+  
 end

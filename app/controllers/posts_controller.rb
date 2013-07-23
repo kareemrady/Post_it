@@ -4,7 +4,8 @@ class PostsController < ApplicationController
   before_action :require_creator, only: [:edit, :update]
   
   def index
-  	@post = Post.all
+     listed_based_on_votes
+            	
   end
 
   def show
@@ -75,7 +76,21 @@ class PostsController < ApplicationController
       access_denied unless logged_in? && current_user == @post.creator
         
     end
-    
+
+    def listed_based_on_votes
+    @a = []
+    Post.all.each do |post|
+      @a << {:votes => post.total_votes, :id => post.id}
+    end
+    l = @a.sort_by {|h| -h[:votes]}
+     m = []
+    l.each do |post|
+      p = Post.find(post[:id])
+      m << p
+    end
+    @post = m   
+
+  end
    
     
 
