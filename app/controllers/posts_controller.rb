@@ -91,8 +91,7 @@ class PostsController < ApplicationController
     @post = m   
 
   end
-   
-    
+      
 
     
 end
