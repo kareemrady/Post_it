@@ -23,6 +23,13 @@ class CommentsController < ApplicationController
 		end
 	end
 
+	def user_comments
+		
+		listed_based_on_votes
+
+	end
+
+
 	def vote
 		respond_to do |format|
       format.js do 
@@ -40,6 +47,7 @@ class CommentsController < ApplicationController
 	private
 
 	def find_post
+
 		@post = Post.find(params[:post_id])
 	end
 
@@ -48,7 +56,20 @@ class CommentsController < ApplicationController
 		@comment = Comment.find(params[:id])
 	end
 
+	def listed_based_on_votes
+    @a = []
+    current_user.comments.each do |comment|
+      @a << {:votes => comment.total_votes, :id => comment.id}
+    end
+    l = @a.sort_by {|h| -h[:votes]}
+     m = []
+    l.each do |comment|
+      c = Comment.find(comment[:id])
+      m << c
+    end
+    @comments = m   
 
+  end
 
 	
 end

@@ -7,7 +7,9 @@
 		<i class= "icon-level-up icon-2x"></i>
 		<% end %>
 		<br/ >
+		<span id="vote_<%= post.id %>_votes">
 		<%= post.total_votes%> votes
+	</span>
 		<br/ >
 		<%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
 		<i class="icon-level-down icon-2x"></i>
@@ -28,6 +30,9 @@
 <small>Created by: <em><%= post.creator.username %></em></small>
 <br/ >
 <small>Created at: <em><%= date_time(post.created_at) %></em></small>
+<br/ >
+<br/ >
+<small><%= link_to "#{post.comments.size} Comments", post_path(post) %></small>
 <br/ >
 
 </div>

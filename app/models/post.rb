@@ -7,11 +7,12 @@ class Post < ActiveRecord::Base
 	validates :url, presence: true
 	validates :description, presence: true, length: {maximum: 140}
 	has_many :votes, as: :voteable
-
+	
 
 	def total_votes
     self.votes.where(vote: true).size - self.votes.where(vote: false).size
   end
   
   
+ 
 end

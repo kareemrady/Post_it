@@ -1,7 +1,8 @@
 PostitTemplate::Application.routes.draw do
   root to: 'posts#index'
   get '/register', to: 'users#new'
-  get '/user_posts', to: 'posts#user_posts'
+  get 'user_posts', to: 'posts#user_posts'
+  get 'user_comments', to: 'comments#user_comments'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'

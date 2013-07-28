@@ -1,0 +1,33 @@
+<% @comments.each do|comment| %>
+<br/ >
+
+	<div class="row">
+	<% if logged_in? %>
+	
+	<div id="voting" class="well span1">
+		
+		<%= link_to vote_post_comment_path(comment.post_id, comment, vote: true), method: 'post', remote: true  do%>
+		<i class="icon-level-up icon-2x"></i>
+		<% end %>
+		<br/ >
+		<span id="vote_<%= comment.id %>_votes">
+		<%= "#{comment.total_votes} votes" %>
+		</span>
+		<%= link_to vote_post_comment_path(comment.post_id, comment, vote: false), method: 'post', remote: true do%>
+		<i class="icon-level-down icon-2x"></i>
+		<% end %>
+		
+	</div>
+	<% end %>
+	
+	<ul class="well span9">
+			
+				
+		<%= comment.body %>
+		<br/ >
+		
+		<small><strong>Created by: </strong><em><%= comment.creator.username %></em></small>
+	
+		</ul>
+	</div>
+	<% end %>

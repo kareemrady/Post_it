@@ -45,7 +45,7 @@ before_action :require_user, only:[:show, :edit, :update]
 private
 
 def find_category
-	@category = Category.find(params[:id])
+	@category = Category.find_by slug: (params[:id])
 end
 
 end

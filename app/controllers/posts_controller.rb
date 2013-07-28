@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, only: [:new, :create, :edit, :update, :vote]
   before_action :require_creator, only: [:edit, :update]
+  before_action :find_comments, only: [:show]
   
   def index
      listed_based_on_votes
@@ -9,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def show
-
+   
   	
   end
 
@@ -77,6 +78,11 @@ class PostsController < ApplicationController
         
     end
 
+    def find_comments
+      @comment = @post.comments
+
+    end
+
     def listed_based_on_votes
     @a = []
     Post.all.each do |post|
@@ -91,7 +97,7 @@ class PostsController < ApplicationController
     @post = m   
 
   end
-      
 
+  
     
 end

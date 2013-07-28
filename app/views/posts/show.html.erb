@@ -9,31 +9,34 @@
 
 Comments:
 <br/ >
-<% @post.comments.each do|comment| %>
 <br/ >
+<div class="row">
 
-	<div class="row">
+	
+	<% @comment.all.each do |comment|%>
 	<% if logged_in? %>
 	
 	<div id="voting" class="well span1">
 		
-		<%= link_to vote_post_comment_path(@post, comment, vote: true), method: 'post', remote: true  do%>
+		<%= link_to vote_post_comment_path(@post, @comment, vote: true), method: 'post', remote: true  do%>
 		<i class="icon-level-up icon-2x"></i>
 		<% end %>
 		<br/ >
+		
 		<span id="vote_<%= comment.id %>_votes">
 		<%= "#{comment.total_votes} votes" %>
 		</span>
-		<%= link_to vote_post_comment_path(@post, comment, vote: false), method: 'post', remote: true do%>
+
+		<%= link_to vote_post_comment_path(@post, @comment, vote: false), method: 'post', remote: true do%>
 		<i class="icon-level-down icon-2x"></i>
-		<% end %>
 		
+	
+		<% end %>
 	</div>
-	<% end %>
+
 	
 
-		
-		<ul class="well span9">
+	<ul class="well span10">
 			
 				
 		<%= comment.body %>
@@ -41,11 +44,18 @@ Comments:
 		
 		<small><strong>Created by: </strong><em><%= comment.creator.username %></em></small>
 	
-		</ul>
-	</div>
 	
+	</ul>
+
+	<% end %>
+	
+	
+	
+	<% end %>
+	</div>
+		
 				
-		<% end %>
+		
 		<div class="row">
 			<div class= "span6">
 		<% if logged_in? %>
@@ -68,7 +78,12 @@ Comments:
 	<% if logged_in? && current_user == @post.creator%>
 <%= link_to 'Edit', edit_post_path(@post)%>
 <br />
-<% end %>
+
 <%= link_to 'Back', posts_path %>
+
 </div>
 </div>
+
+<% end %>
+</div>
+
