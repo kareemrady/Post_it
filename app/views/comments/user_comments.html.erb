@@ -5,20 +5,20 @@
 	<% if logged_in? %>
 	
 	<div id="voting" class="well span1">
-		
-		<%= link_to vote_post_comment_path(post.comments, comment, vote: true), method: 'post', remote: true  do%>
+		<% @comments.each do |comment|%>
+		<%= link_to vote_post_comment_path(comment.post_id, comment, vote: true), method: 'post', remote: true  do%>
 		<i class="icon-level-up icon-2x"></i>
 		<% end %>
 		<br/ >
 		<span id="vote_<%= comment.id %>_votes">
 		<%= "#{comment.total_votes} votes" %>
 		</span>
-		<%= link_to vote_post_comment_path(post.comments, comment, vote: false), method: 'post', remote: true do%>
+		<%= link_to vote_post_comment_path(comment.post_id, comment, vote: false), method: 'post', remote: true do%>
 		<i class="icon-level-down icon-2x"></i>
 		<% end %>
 		
-	</div>
-	<% end %>
+	
+	
 	
 	<ul class="well span9">
 			
@@ -29,4 +29,6 @@
 		<small><strong>Created by: </strong><em><%= comment.creator.username %></em></small>
 	
 		</ul>
-	
+	<% end %>
+	<% end %>
+	</div>
